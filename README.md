@@ -1,4 +1,7 @@
 # secure-qrcode
+[![Build Status](https://github.com/allisson/secure-qrcode/workflows/tests/badge.svg)](https://github.com/allisson/secure-qrcode/actions)
+[![Docker Repository on Quay](https://quay.io/repository/allisson/secure-qrcode/status "Docker Repository on Quay")](https://quay.io/repository/allisson/secure-qrcode)
+
 Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a secure QR code.
 
 ## run the api
@@ -6,7 +9,7 @@ Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a
 The server can be started using a docker image.
 
 ```bash
-docker run --rm -p 8000:8000 allisson/secure-qrcode
+docker run --rm -p 8000:8000 quay.io/allisson/secure-qrcode
 ```
 
 Now the API server will be running on port 8000.
