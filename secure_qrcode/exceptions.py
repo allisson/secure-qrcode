@@ -1,0 +1,2 @@
+class DecryptError(Exception):
+    pass

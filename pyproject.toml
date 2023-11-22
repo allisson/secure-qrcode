@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "secure-qrcode"
+version = "0.1.0"
+description = "Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a secure QR code"
+authors = ["Allisson Azevedo"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+qrcode = {extras = ["pil"], version = "^7.4.2"}
+pycryptodome = "^3.19.0"
+fastapi = "^0.104.1"
+uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.3"
+pre-commit = "^3.5.0"
+pytest-cov = "^4.1.0"
+httpx = "^0.25.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+minversion = "7.4"
+addopts = "-vvv --cov=secure_qrcode --cov-report=term-missing"
+
+[tool.isort]
+profile = "black"
+line_length = 110
+force_alphabetical_sort_within_sections = true
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+default_section = "THIRDPARTY"
