@@ -1,5 +1,5 @@
 # secure-qrcode
-[![Build Status](https://github.com/allisson/secure-qrcode/workflows/tests/badge.svg)](https://github.com/allisson/secure-qrcode/actions)
+[![Build Status](https://github.com/allisson/secure-qrcode/workflows/build/badge.svg)](https://github.com/allisson/secure-qrcode/actions)
 [![Docker Repository on Quay](https://quay.io/repository/allisson/secure-qrcode/status "Docker Repository on Quay")](https://quay.io/repository/allisson/secure-qrcode)
 
 Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a secure QR code.
