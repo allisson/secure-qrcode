@@ -76,7 +76,7 @@ The ChaCha20-Poly1305 works with a 32-byte secret key. When you use a secret key
 
 The default character for the left padding is the white space, which can be changed using the `"secure_qrcode_left_padding_char"` environment variable.
 
-For example, when using the secret key `"my super secret key"`  the value used in the encryption function will be `"my super secret key             "`.
+For example, when using the secret key `"my super secret key"` the value used in the encryption function will be `"my super secret key             "`.
 
 To start the server using another left padding char:
 
