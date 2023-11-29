@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/allisson/secure-qrcode/compare/v1.0.1...v1.1.0) (2023-11-29)
+
+
+### Features
+
+* add option to change the left padding char ([#9](https://github.com/allisson/secure-qrcode/issues/9)) ([3559857](https://github.com/allisson/secure-qrcode/commit/355985718bd9ea5f7833088e63a49cb7048e4ed8))
+
 ## [1.0.1](https://github.com/allisson/secure-qrcode/compare/v1.0.0...v1.0.1) (2023-11-22)
 
 
