@@ -11,6 +11,7 @@ qrcode = {extras = ["pil"], version = "^7.4.2"}
 pycryptodome = "^3.19.0"
 fastapi = "^0.104.1"
 uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
+pydantic-settings = "^2.1.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.3"

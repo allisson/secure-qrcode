@@ -6,7 +6,7 @@ Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a
 
 ## run the api
 
-The server can be started using a docker image.
+The server can be started using a docker image:
 
 ```bash
 docker run --rm -p 8000:8000 quay.io/allisson/secure-qrcode
@@ -14,7 +14,7 @@ docker run --rm -p 8000:8000 quay.io/allisson/secure-qrcode
 
 Now the API server will be running on port 8000.
 
-## api documentation.
+## api documentation
 
 You can access the API documentation using these two endpoints:
 - http://localhost:8000/docs
@@ -22,7 +22,7 @@ You can access the API documentation using these two endpoints:
 
 ## generate a secure QR code
 
-Call the API passing at least the plaintext and key fields.
+Call the API passing at least the plaintext and key fields:
 
 ```bash
 curl --location 'http://localhost:8000/v1/encode' \
@@ -48,7 +48,7 @@ Use any program that read a QR code, the content will be something like this:
 }
 ```
 
-Now call the API passing the encrypted_data and the key.
+Now call the API passing the encrypted_data and the key:
 
 ```bash
 curl --location 'http://localhost:8000/v1/decode' \
@@ -68,4 +68,18 @@ curl --location 'http://localhost:8000/v1/decode' \
 {
   "decrypted_data": "my super secret text"
 }
+```
+
+## about left padding char
+
+The ChaCha20-Poly1305 works with a 32-byte secret key. When you use a secret key with less than 32 bytes, we need to use left padding until the required size is reached.
+
+The default character for the left padding is the white space, which can be changed using the "secure_qrcode_left_padding_char" environment variable.
+
+For example, when using the secret key "my super secret key" the value used in the encryption function will be "my super secret key             ".
+
+To start the server using another left padding char:
+
+```bash
+docker run --rm -p 8000:8000 -e secure_qrcode_left_padding_char=9 quay.io/allisson/secure-qrcode
 ```
