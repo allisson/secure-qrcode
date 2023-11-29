@@ -7,9 +7,11 @@ from secure_qrcode.exceptions import DecryptError
 from secure_qrcode.models import EncryptedData
 
 
-def encrypt(plaintext: str, key: str) -> EncryptedData:
+def encrypt(plaintext: str, key: str, left_padding_char: str = " ") -> EncryptedData:
     header = get_random_bytes(16)
-    cipher = ChaCha20_Poly1305.new(key=key.encode(encoding="utf-8").ljust(32))
+    cipher = ChaCha20_Poly1305.new(
+        key=key.encode(encoding="utf-8").ljust(32, left_padding_char.encode("utf-8"))
+    )
     cipher.update(header)
     ciphertext, tag = cipher.encrypt_and_digest(plaintext.encode(encoding="utf-8"))
     jk = ["nonce", "header", "ciphertext", "tag"]
@@ -18,12 +20,14 @@ def encrypt(plaintext: str, key: str) -> EncryptedData:
     return EncryptedData(**result)
 
 
-def decrypt(encrypted_data: EncryptedData, key: str) -> str:
+def decrypt(encrypted_data: EncryptedData, key: str, left_padding_char: str = " ") -> str:
     try:
         b64 = encrypted_data.model_dump()
         jk = ["nonce", "header", "ciphertext", "tag"]
         jv = {k: b64decode(b64[k]) for k in jk}
-        cipher = ChaCha20_Poly1305.new(key=key.encode(encoding="utf-8").ljust(32), nonce=jv["nonce"])
+        cipher = ChaCha20_Poly1305.new(
+            key=key.encode(encoding="utf-8").ljust(32, left_padding_char.encode("utf-8")), nonce=jv["nonce"]
+        )
         cipher.update(jv["header"])
         plaintext = cipher.decrypt_and_verify(jv["ciphertext"], jv["tag"])
     except (ValueError, KeyError) as exc:

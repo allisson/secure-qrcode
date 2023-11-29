@@ -3,6 +3,7 @@ from base64 import b64encode
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
+from secure_qrcode.config import settings
 from secure_qrcode.crypto import decrypt, encrypt
 from secure_qrcode.exceptions import DecryptError
 from secure_qrcode.models import (
@@ -30,7 +31,7 @@ def decrypt_error_exception_handler(request: Request, exc: DecryptError):
 
 @app.post("/v1/encode", status_code=201)
 def encode(request: EncodeRequest) -> EncodeResponse:
-    encrypted_data = encrypt(request.plaintext, request.key)
+    encrypted_data = encrypt(request.plaintext, request.key, settings.left_padding_char)
     img_io = make(
         encrypted_data,
         error_correction=request.error_correction,
@@ -46,5 +47,5 @@ def encode(request: EncodeRequest) -> EncodeResponse:
     responses={400: {"model": DecryptErrorResponse, "description": "Incorrect decryption"}},
 )
 def decode(request: DecodeRequest) -> DecodeResponse:
-    decrypted_data = decrypt(request.encrypted_data, request.key)
+    decrypted_data = decrypt(request.encrypted_data, request.key, settings.left_padding_char)
     return DecodeResponse(decrypted_data=decrypted_data)
