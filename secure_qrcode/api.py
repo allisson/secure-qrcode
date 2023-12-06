@@ -1,7 +1,9 @@
 from base64 import b64encode
 
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from secure_qrcode.config import settings
 from secure_qrcode.crypto import decrypt, encrypt
@@ -19,6 +21,8 @@ app = FastAPI(
     title="Secure QR code",
     description="Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a secure QR code",
 )
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
 
 @app.exception_handler(DecryptError)
@@ -29,7 +33,12 @@ def decrypt_error_exception_handler(request: Request, exc: DecryptError):
     )
 
 
-@app.post("/v1/encode", status_code=201)
+@app.get("/", response_class=HTMLResponse, tags=["home"])
+def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+
+@app.post("/v1/encode", status_code=201, tags=["api"])
 def encode(request: EncodeRequest) -> EncodeResponse:
     encrypted_data = encrypt(request.plaintext, request.key, settings.left_padding_char)
     img_io = make(
@@ -45,6 +54,7 @@ def encode(request: EncodeRequest) -> EncodeResponse:
     "/v1/decode",
     status_code=201,
     responses={400: {"model": DecryptErrorResponse, "description": "Incorrect decryption"}},
+    tags=["api"],
 )
 def decode(request: DecodeRequest) -> DecodeResponse:
     decrypted_data = decrypt(request.encrypted_data, request.key, settings.left_padding_char)

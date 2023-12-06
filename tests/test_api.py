@@ -3,6 +3,12 @@ from base64 import b64encode
 from secure_qrcode.models import DecodeRequest, EncodeRequest, EncryptedData
 
 
+def test_index(client):
+    response = client.get("/")
+
+    assert response.status_code == 200
+
+
 def test_encode(client, plaintext, key):
     request = EncodeRequest(plaintext=plaintext, key=key)
     response = client.post("/v1/encode", json=request.model_dump())
