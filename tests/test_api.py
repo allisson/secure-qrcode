@@ -48,3 +48,9 @@ def test_decode_error(client, plaintext, key):
     assert response.status_code == 400
     response_data = response.json()
     assert response_data["message"] == "Incorrect decryption, please check your data"
+
+
+def test_healthz(client):
+    response = client.get("/healthz")
+
+    assert response.status_code == 200

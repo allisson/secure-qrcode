@@ -14,6 +14,7 @@ from secure_qrcode.models import (
     DecryptErrorResponse,
     EncodeRequest,
     EncodeResponse,
+    HealthResponse,
 )
 from secure_qrcode.qrcode import make
 
@@ -59,3 +60,8 @@ def encode(request: EncodeRequest) -> EncodeResponse:
 def decode(request: DecodeRequest) -> DecodeResponse:
     decrypted_data = decrypt(request.encrypted_data, request.key, settings.left_padding_char)
     return DecodeResponse(decrypted_data=decrypted_data)
+
+
+@app.get("/healthz", tags=["healthcheck"])
+def healthz() -> HealthResponse:
+    return HealthResponse(success=True)

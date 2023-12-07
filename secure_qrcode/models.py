@@ -44,3 +44,7 @@ class DecodeResponse(BaseModel):
 
 class DecryptErrorResponse(BaseModel):
     message: str
+
+
+class HealthResponse(BaseModel):
+    success: bool
