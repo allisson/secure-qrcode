@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/allisson/secure-qrcode/compare/v1.1.0...v1.2.0) (2023-12-10)
+
+
+### Features
+
+* first frontend version ([#12](https://github.com/allisson/secure-qrcode/issues/12)) ([760f2d4](https://github.com/allisson/secure-qrcode/commit/760f2d48e19f9a2dd43a0b1839853bc4daf84819))
+
 ## [1.1.0](https://github.com/allisson/secure-qrcode/compare/v1.0.1...v1.1.0) (2023-11-29)
 
 
