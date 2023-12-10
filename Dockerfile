@@ -33,13 +33,6 @@ ENV PYTHONPATH /app
 # Copy content from builder stage
 COPY --from=builder /app /app
 
-# Install packages
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install --no-install-recommends -y tini && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
 # Add qrcode user and create directories
 RUN useradd -m qrcode && mkdir -p /app
 
@@ -54,4 +47,4 @@ USER qrcode
 EXPOSE 8000
 
 # Set entrypoint and cmd
-ENTRYPOINT ["/usr/bin/tini", "--", "uvicorn", "--host", "0.0.0.0", "--port", "8000", "secure_qrcode.api:app"]
+ENTRYPOINT ["uvicorn", "--host", "0.0.0.0", "--port", "8000", "secure_qrcode.api:app"]

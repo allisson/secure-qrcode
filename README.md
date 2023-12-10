@@ -6,7 +6,7 @@ Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a
 
 ## access via browser
 
-Open the url https://secure-qrcode.onrender.com on your browser.
+Open the url https://secure-qrcode.fly.dev on your browser.
 
 If you want to run this on your local machine, see the next section.
 
