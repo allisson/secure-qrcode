@@ -180,8 +180,9 @@
         function QRReader({ onCode }) {
           const canvasEl = React.useRef(null);
           const videoEl = React.useRef(null);
+          const streamRef = React.useRef(null);
 
-          React.useLayoutEffect(() => {
+          React.useEffect(() => {
             if (!videoEl.current || !canvasEl.current) {
               return;
             }
@@ -189,6 +190,7 @@
             navigator.mediaDevices
               .getUserMedia({ video: { facingMode: "environment" } })
               .then((stream) => {
+                streamRef.current = stream;
                 let video = videoEl.current;
                 video.srcObject = stream;
                 video.setAttribute("playsinline", true);
@@ -197,6 +199,10 @@
                   tick(videoEl.current, canvasEl.current, onCode)
                 );
               });
+
+            return () => {
+              streamRef.current?.getTracks().forEach((track) => track.stop());
+            };
           }, [videoEl, canvasEl]);
 
           return (
