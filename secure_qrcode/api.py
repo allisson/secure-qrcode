@@ -24,6 +24,7 @@ app = FastAPI(
 )
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
+templates.env.globals["url_for"] = app.url_path_for
 
 
 @app.exception_handler(DecryptError)
