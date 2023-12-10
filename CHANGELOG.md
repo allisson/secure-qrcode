@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/allisson/secure-qrcode/compare/v1.2.0...v1.2.1) (2023-12-10)
+
+
+### Bug Fixes
+
+* Change templates.env.globals["url_for"] ([#14](https://github.com/allisson/secure-qrcode/issues/14)) ([da8ac8a](https://github.com/allisson/secure-qrcode/commit/da8ac8a98eb5ed55b2ca13e977862566a5852dee))
+
 ## [1.2.0](https://github.com/allisson/secure-qrcode/compare/v1.1.0...v1.2.0) (2023-12-10)
 
 
