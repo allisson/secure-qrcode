@@ -3,6 +3,12 @@ from base64 import b64encode
 from secure_qrcode.models import DecodeRequest, EncodeRequest, EncryptedData
 
 
+def test_index(client):
+    response = client.get("/")
+
+    assert response.status_code == 200
+
+
 def test_encode(client, plaintext, key):
     request = EncodeRequest(plaintext=plaintext, key=key)
     response = client.post("/v1/encode", json=request.model_dump())
@@ -42,3 +48,9 @@ def test_decode_error(client, plaintext, key):
     assert response.status_code == 400
     response_data = response.json()
     assert response_data["message"] == "Incorrect decryption, please check your data"
+
+
+def test_healthz(client):
+    response = client.get("/healthz")
+
+    assert response.status_code == 200

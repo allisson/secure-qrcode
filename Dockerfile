@@ -17,6 +17,8 @@ RUN poetry install --only main
 
 # Copy app files to workdir
 COPY secure_qrcode ./secure_qrcode
+COPY templates ./templates
+COPY static ./static
 
 ##### Final Stage #####
 FROM python:3.12-slim-bookworm

@@ -4,6 +4,12 @@
 
 Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a secure QR code.
 
+## access via browser
+
+Open the url https://secure-qrcode.onrender.com on your browser.
+
+If you want to run this on your local machine, see the next section.
+
 ## run the api
 
 The server can be started using a docker image:
@@ -12,7 +18,7 @@ The server can be started using a docker image:
 docker run --rm -p 8000:8000 quay.io/allisson/secure-qrcode
 ```
 
-Now the API server will be running on port 8000.
+Now the API server will be running on port 8000 and you can open the url http://localhost:8000 on your browser.
 
 ## api documentation
 
