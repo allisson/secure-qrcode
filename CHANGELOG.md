@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/allisson/secure-qrcode/compare/v1.2.1...v1.3.0) (2023-12-11)
+
+
+### Features
+
+* improve Dockerfile ([#18](https://github.com/allisson/secure-qrcode/issues/18)) ([866411e](https://github.com/allisson/secure-qrcode/commit/866411e3fa0fba70e80e37b9dda1f8f1341a154b))
+
 ## [1.2.1](https://github.com/allisson/secure-qrcode/compare/v1.2.0...v1.2.1) (2023-12-10)
 
 
