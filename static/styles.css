@@ -58,12 +58,6 @@ img {
   flex-direction: row;
 }
 
-@media only screen and (max-width: 600px) {
-  .feature {
-    flex-direction: column;
-  }
-}
-
 form {
   padding: 20px;
   max-width: 400px;
@@ -123,4 +117,21 @@ img.icon-footer {
   justify-content: center;
   align-items: center;
   padding: 20px 0;
+}
+
+.btn-methods {
+  background: transparent !important;
+  border: none !important;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 8px;
+  }
+  form {
+    width: auto;
+  }
+  .feature {
+    flex-direction: column;
+  }
 }
