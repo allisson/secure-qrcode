@@ -1,8 +1,11 @@
-##### Builder Stage #####
-FROM python:3.12-slim-bookworm as builder
+##### Base Stage #####
+FROM python:3.12-slim-bookworm as base
 
 # Set default path
 ENV PATH="/app/.venv/bin:${PATH}"
+
+##### Builder Stage #####
+FROM base as builder
 
 # Set default workdir
 WORKDIR /app
@@ -21,20 +24,13 @@ COPY templates ./templates
 COPY static ./static
 
 ##### Final Stage #####
-FROM python:3.12-slim-bookworm
-
-# Disable Prompt During Packages Installation
-ARG DEBIAN_FRONTEND=noninteractive
-
-# Set default path
-ENV PATH="/app/.venv/bin:${PATH}"
-ENV PYTHONPATH /app
+FROM base
 
 # Copy content from builder stage
 COPY --from=builder /app /app
 
 # Add qrcode user and create directories
-RUN useradd -m qrcode && mkdir -p /app
+RUN useradd -m qrcode
 
 # Set permissions
 RUN chown -R qrcode:qrcode /app
