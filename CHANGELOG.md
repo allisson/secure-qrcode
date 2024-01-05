@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/allisson/secure-qrcode/compare/v1.3.0...v1.3.1) (2024-01-05)
+
+
+### Bug Fixes
+
+* update the pycryptodome version ([#20](https://github.com/allisson/secure-qrcode/issues/20)) ([2a7baee](https://github.com/allisson/secure-qrcode/commit/2a7baee0d6f38cdb3cb46fbacc62db79327c76af))
+
 ## [1.3.0](https://github.com/allisson/secure-qrcode/compare/v1.2.1...v1.3.0) (2023-12-11)
 
 
