@@ -41,7 +41,7 @@ def test_decode_error(client, plaintext, key):
         ciphertext="7WXqkkf4CWlH5A2vmXDbyMc=",
         tag="l027RcLlp2acAUxIxfYiAg==",
     )
-    encrypted_data.header = b64encode("invalid-header".encode("utf-8")).decode("utf-8")
+    encrypted_data.header = b64encode(b"invalid-header").decode("utf-8")
     request = DecodeRequest(encrypted_data=encrypted_data, key=key)
     response = client.post("/v1/decode", json=request.model_dump())
 
