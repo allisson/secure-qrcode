@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/allisson/secure-qrcode/compare/v1.3.1...v1.4.0) (2024-04-01)
+
+
+### Features
+
+* switch the lint to ruff ([#22](https://github.com/allisson/secure-qrcode/issues/22)) ([1997a29](https://github.com/allisson/secure-qrcode/commit/1997a29b58e2e08c9b7e6d7e1ac8613730376540))
+
 ## [1.3.1](https://github.com/allisson/secure-qrcode/compare/v1.3.0...v1.3.1) (2024-01-05)
 
 
