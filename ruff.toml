@@ -1,0 +1,31 @@
+# Line and indent config.
+line-length = 110
+indent-width = 4
+
+# Assume Python 3.12.
+target-version = "py312"
+
+# Enable automatic fixes.
+fix = true
+unsafe-fixes = true
+
+# Format like black.
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+# Enable linting for:
+# "UP": pyupgrade https://docs.astral.sh/ruff/rules/#pyupgrade-up
+# "F": Pyflakes https://docs.astral.sh/ruff/rules/#pyflakes-f
+# "E", "W": pycodestyle https://docs.astral.sh/ruff/rules/#pycodestyle-e-w
+# "I": isort https://docs.astral.sh/ruff/rules/#isort-i
+[lint]
+select = ["UP", "F", "E", "W", "I"]
+ignore = ["E203", "E501"]
+
+# Isort config.
+[lint.isort]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+order-by-type = false

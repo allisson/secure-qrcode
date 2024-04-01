@@ -27,10 +27,3 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 minversion = "7.4"
 addopts = "-vvv --cov=secure_qrcode --cov-report=term-missing"
-
-[tool.isort]
-profile = "black"
-line_length = 110
-force_alphabetical_sort_within_sections = true
-sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
-default_section = "THIRDPARTY"

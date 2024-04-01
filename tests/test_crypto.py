@@ -24,7 +24,7 @@ def test_decrypt_error(key):
         ciphertext="7WXqkkf4CWlH5A2vmXDbyMc=",
         tag="l027RcLlp2acAUxIxfYiAg==",
     )
-    encrypted_data.header = b64encode("invalid-header".encode("utf-8")).decode("utf-8")
+    encrypted_data.header = b64encode(b"invalid-header").decode("utf-8")
 
     with pytest.raises(DecryptError) as excinfo:
         decrypt(encrypted_data, key)
