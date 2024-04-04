@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/allisson/secure-qrcode/compare/v1.4.0...v1.4.1) (2024-04-04)
+
+
+### Bug Fixes
+
+* update fastapi version ([#24](https://github.com/allisson/secure-qrcode/issues/24)) ([005dcc9](https://github.com/allisson/secure-qrcode/commit/005dcc91470cfa48d834765ea0bac7fc45885c16))
+
 ## [1.4.0](https://github.com/allisson/secure-qrcode/compare/v1.3.1...v1.4.0) (2024-04-01)
 
 
