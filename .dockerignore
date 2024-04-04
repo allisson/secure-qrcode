@@ -2,3 +2,4 @@
 .github/
 .pytest_cache/
 .coverage
+.ruff_cache/
