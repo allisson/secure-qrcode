@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/allisson/secure-qrcode/compare/v1.4.2...v1.4.3) (2024-07-12)
+
+
+### Bug Fixes
+
+* update certifi version ([#28](https://github.com/allisson/secure-qrcode/issues/28)) ([48bba64](https://github.com/allisson/secure-qrcode/commit/48bba6427ca3ff0dc777365aa4c63c59d7f8af7e))
+
 ## [1.4.2](https://github.com/allisson/secure-qrcode/compare/v1.4.1...v1.4.2) (2024-06-24)
 
 
