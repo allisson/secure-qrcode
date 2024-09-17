@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/allisson/secure-qrcode/compare/v1.4.3...v1.5.0) (2024-09-17)
+
+
+### Features
+
+* switch to uv package manager ([#30](https://github.com/allisson/secure-qrcode/issues/30)) ([76d90a0](https://github.com/allisson/secure-qrcode/commit/76d90a0ca0f89252bf2253735f1a9654d6936651))
+
 ## [1.4.3](https://github.com/allisson/secure-qrcode/compare/v1.4.2...v1.4.3) (2024-07-12)
 
 
