@@ -1,22 +1,21 @@
 ##### Base Stage #####
-FROM python:3.12-slim-bookworm as base
+FROM python:3.12-slim-bookworm AS base
 
 # Set default path
 ENV PATH="/app/.venv/bin:${PATH}"
 
 ##### Builder Stage #####
-FROM base as builder
+FROM base AS builder
 
 # Set default workdir
 WORKDIR /app
 
 # Create virtualenv and install Python packages
 RUN pip install --no-cache-dir pip -U && \
-    pip install --no-cache-dir poetry && \
-    poetry config virtualenvs.in-project true
-COPY ./poetry.lock poetry.lock
+    pip install --no-cache-dir uv
+COPY ./uv.lock uv.lock
 COPY ./pyproject.toml pyproject.toml
-RUN poetry install --only main
+RUN uv sync --no-dev --frozen
 
 # Copy app files to workdir
 COPY secure_qrcode ./secure_qrcode
