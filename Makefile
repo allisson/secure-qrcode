@@ -1,14 +1,14 @@
 .PHONY: test
 test:
-	poetry run pytest -v
+	uv run pytest -v
 
 .PHONY: lint
 lint:
-	poetry run pre-commit run --all-files
+	uv run pre-commit run --all-files
 
 .PHONY: run-api
 run-api:
-	poetry run uvicorn secure_qrcode.api:app --reload
+	uv run uvicorn secure_qrcode.api:app --reload
 
 .PHONY: docker-build
 docker-build:
