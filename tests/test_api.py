@@ -21,10 +21,11 @@ def test_encode(client, plaintext, key):
 
 def test_decode(client, plaintext, key):
     encrypted_data = EncryptedData(
-        nonce="c2nduzQLo4sWOe3n",
-        header="oheZpcpquDA7CoUuAi8Mng==",
-        ciphertext="7WXqkkf4CWlH5A2vmXDbyMc=",
-        tag="l027RcLlp2acAUxIxfYiAg==",
+        salt="KtiCW1E0VLupOXOtpDIlZQ==",
+        iterations=1200000,
+        associated_data="JFPRP6/RMmCIn3DLjA/ceg==",
+        nonce="LbF9P5FwPYyGCTJM",
+        ciphertext="/N8WF0+QnqsDhOQ9iWuhWrXgbrZlG4Hqm9cYt/QO9Msu",
     )
     request = DecodeRequest(encrypted_data=encrypted_data, key=key)
     response = client.post("/v1/decode", json=request.model_dump())
@@ -34,14 +35,15 @@ def test_decode(client, plaintext, key):
     assert response_data["decrypted_data"] == plaintext
 
 
-def test_decode_error(client, plaintext, key):
+def test_decode_error(client, key):
     encrypted_data = EncryptedData(
-        nonce="c2nduzQLo4sWOe3n",
-        header="oheZpcpquDA7CoUuAi8Mng==",
-        ciphertext="7WXqkkf4CWlH5A2vmXDbyMc=",
-        tag="l027RcLlp2acAUxIxfYiAg==",
+        salt="KtiCW1E0VLupOXOtpDIlZQ==",
+        iterations=1200000,
+        associated_data="JFPRP6/RMmCIn3DLjA/ceg==",
+        nonce="LbF9P5FwPYyGCTJM",
+        ciphertext="/N8WF0+QnqsDhOQ9iWuhWrXgbrZlG4Hqm9cYt/QO9Msu",
     )
-    encrypted_data.header = b64encode(b"invalid-header").decode("utf-8")
+    encrypted_data.associated_data = b64encode(b"invalid-aad").decode("utf-8")
     request = DecodeRequest(encrypted_data=encrypted_data, key=key)
     response = client.post("/v1/decode", json=request.model_dump())
 

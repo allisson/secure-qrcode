@@ -10,23 +10,25 @@ from secure_qrcode.models import EncryptedData
 def test_encrypt_decrypt(plaintext, key):
     encrypted_data = encrypt(plaintext, key)
 
+    assert encrypted_data.salt
+    assert encrypted_data.iterations
+    assert encrypted_data.associated_data
     assert encrypted_data.nonce
-    assert encrypted_data.header
     assert encrypted_data.ciphertext
-    assert encrypted_data.tag
     assert decrypt(encrypted_data, key) == plaintext
 
 
 def test_decrypt_error(key):
     encrypted_data = EncryptedData(
-        nonce="c2nduzQLo4sWOe3n",
-        header="oheZpcpquDA7CoUuAi8Mng==",
-        ciphertext="7WXqkkf4CWlH5A2vmXDbyMc=",
-        tag="l027RcLlp2acAUxIxfYiAg==",
+        salt="KtiCW1E0VLupOXOtpDIlZQ==",
+        iterations=1200000,
+        associated_data="JFPRP6/RMmCIn3DLjA/ceg==",
+        nonce="LbF9P5FwPYyGCTJM",
+        ciphertext="/N8WF0+QnqsDhOQ9iWuhWrXgbrZlG4Hqm9cYt/QO9Msu",
     )
-    encrypted_data.header = b64encode(b"invalid-header").decode("utf-8")
+    encrypted_data.associated_data = b64encode(b"invalid-aad").decode("utf-8")
 
     with pytest.raises(DecryptError) as excinfo:
         decrypt(encrypted_data, key)
 
-    assert str(excinfo.value) == "Incorrect decryption, exc=MAC check failed"
+    assert str(excinfo.value) == "Incorrect decryption, exc=Invalid Tag"

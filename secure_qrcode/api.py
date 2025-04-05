@@ -5,7 +5,6 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from secure_qrcode.config import settings
 from secure_qrcode.crypto import decrypt, encrypt
 from secure_qrcode.exceptions import DecryptError
 from secure_qrcode.models import (
@@ -42,7 +41,7 @@ def index(request: Request):
 
 @app.post("/v1/encode", status_code=201, tags=["api"])
 def encode(request: EncodeRequest) -> EncodeResponse:
-    encrypted_data = encrypt(request.plaintext, request.key, settings.left_padding_char)
+    encrypted_data = encrypt(request.plaintext, request.key)
     img_io = make(
         encrypted_data,
         error_correction=request.error_correction,
@@ -59,7 +58,7 @@ def encode(request: EncodeRequest) -> EncodeResponse:
     tags=["api"],
 )
 def decode(request: DecodeRequest) -> DecodeResponse:
-    decrypted_data = decrypt(request.encrypted_data, request.key, settings.left_padding_char)
+    decrypted_data = decrypt(request.encrypted_data, request.key)
     return DecodeResponse(decrypted_data=decrypted_data)
 
 
