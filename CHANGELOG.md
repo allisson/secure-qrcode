@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/allisson/secure-qrcode/compare/v1.6.0...v2.0.0) (2025-04-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* this new version "2.x" is incompatible with version "1.x"
+
+### Features
+
+* use PBKDF2 Key derivation function ([#34](https://github.com/allisson/secure-qrcode/issues/34)) ([9746164](https://github.com/allisson/secure-qrcode/commit/97461646e79a9ba2f6f1e140d7d2ebe1139ca378))
+
 ## [1.6.0](https://github.com/allisson/secure-qrcode/compare/v1.5.0...v1.6.0) (2025-04-05)
 
 
