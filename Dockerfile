@@ -1,5 +1,5 @@
 ##### Base Stage #####
-FROM python:3.12-slim-bookworm AS base
+FROM python:3.13-slim-bookworm AS base
 
 # Set default path
 ENV PATH="/app/.venv/bin:${PATH}"

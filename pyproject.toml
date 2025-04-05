@@ -3,7 +3,7 @@ name = "secure-qrcode"
 version = "0.1.0"
 description = "Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a secure QR code"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13,<3.14"
 dependencies = [
     "fastapi>=0.114.2",
     "jinja2>=3.1.4",
