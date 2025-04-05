@@ -4,10 +4,11 @@ from pydantic import BaseModel, Field
 
 
 class EncryptedData(BaseModel):
+    salt: str
+    iterations: int
+    associated_data: str
     nonce: str
-    header: str
     ciphertext: str
-    tag: str
 
 
 class ErrorCorrection(IntEnum):
