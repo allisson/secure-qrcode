@@ -21,8 +21,9 @@ line-ending = "auto"
 # "F": Pyflakes https://docs.astral.sh/ruff/rules/#pyflakes-f
 # "E", "W": pycodestyle https://docs.astral.sh/ruff/rules/#pycodestyle-e-w
 # "I": isort https://docs.astral.sh/ruff/rules/#isort-i
+# "B": bugbear https://docs.astral.sh/ruff/rules/#flake8-bugbear-b
 [lint]
-select = ["UP", "F", "E", "W", "I"]
+select = ["UP", "F", "E", "W", "I", "B"]
 ignore = ["E203", "E501"]
 
 # Isort config.

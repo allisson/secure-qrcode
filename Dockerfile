@@ -1,5 +1,5 @@
 ##### Base Stage #####
-FROM python:3.13-slim-bookworm AS base
+FROM python:3.14-slim-bookworm AS base
 
 # Set default path
 ENV PATH="/app/.venv/bin:${PATH}"
@@ -21,6 +21,9 @@ RUN uv sync --no-dev --frozen
 COPY secure_qrcode ./secure_qrcode
 COPY templates ./templates
 COPY static ./static
+
+# Compile all Python source files to bytecode
+RUN python -m compileall -f .
 
 ##### Final Stage #####
 FROM base
