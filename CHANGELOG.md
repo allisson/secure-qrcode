@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/allisson/secure-qrcode/compare/v2.0.0...v2.1.0) (2025-10-18)
+
+
+### Features
+
+* update python version to 3.14 ([#36](https://github.com/allisson/secure-qrcode/issues/36)) ([dc13d34](https://github.com/allisson/secure-qrcode/commit/dc13d34063bb9c4b01c5392e89c435dbb1ab7810))
+
 ## [2.0.0](https://github.com/allisson/secure-qrcode/compare/v1.6.0...v2.0.0) (2025-04-05)
 
 
