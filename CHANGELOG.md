@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/allisson/secure-qrcode/compare/v2.2.0...v2.3.0) (2025-10-25)
+
+
+### Features
+
+* update fastapi and uvicorn versions ([#42](https://github.com/allisson/secure-qrcode/issues/42)) ([900264c](https://github.com/allisson/secure-qrcode/commit/900264cb8d6ec3c2dd57aff3ace79a069db1e2d9))
+
 ## [2.2.0](https://github.com/allisson/secure-qrcode/compare/v2.1.0...v2.2.0) (2025-10-25)
 
 
