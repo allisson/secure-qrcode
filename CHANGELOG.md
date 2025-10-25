@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/allisson/secure-qrcode/compare/v2.1.0...v2.2.0) (2025-10-25)
+
+
+### Features
+
+* add support for arm images ([#39](https://github.com/allisson/secure-qrcode/issues/39)) ([c4891d3](https://github.com/allisson/secure-qrcode/commit/c4891d3cf3b45142405d1a946d0e4797708abe74))
+
 ## [2.1.0](https://github.com/allisson/secure-qrcode/compare/v2.0.0...v2.1.0) (2025-10-18)
 
 
