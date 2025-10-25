@@ -1,6 +1,6 @@
 # secure-qrcode
 [![Build Status](https://github.com/allisson/secure-qrcode/actions/workflows/lint-and-tests.yml/badge.svg)](https://github.com/allisson/secure-qrcode/actions)
-[![Docker Repository on Quay](https://quay.io/repository/allisson/secure-qrcode/status "Docker Repository on Quay")](https://quay.io/repository/allisson/secure-qrcode)
+[![Docker Image Version](https://img.shields.io/docker/v/allisson/secure-qrcode)](https://hub.docker.com/r/allisson/secure-qrcode)
 
 Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a secure QR code.
 
@@ -25,7 +25,7 @@ If you want to run this on your local machine, see the next section.
 The server can be started using a docker image:
 
 ```bash
-docker run --rm -p 8000:8000 quay.io/allisson/secure-qrcode
+docker run --rm -p 8000:8000 allisson/secure-qrcode
 ```
 
 Now the API server will be running on port 8000 and you can open the url http://localhost:8000 on your browser.
@@ -93,5 +93,5 @@ curl --location 'http://localhost:8000/v1/decode' \
 The default value for PBKDF2 iterations is 1200000, you can change this value using the "secure_qrcode_pbkdf2_iterations" environment variable.
 
 ```
-docker run --rm -p 8000:8000 -e secure_qrcode_pbkdf2_iterations=1000000 quay.io/allisson/secure-qrcode
+docker run --rm -p 8000:8000 -e secure_qrcode_pbkdf2_iterations=1000000 allisson/secure-qrcode
 ```
