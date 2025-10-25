@@ -1,11 +1,12 @@
 name: Build and Push Multi-Arch Docker Image
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
     tags:
-      - "v*.*.*"
+      - 'v*'
 
 jobs:
   build-and-push:
@@ -32,9 +33,6 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/secure-qrcode
-          tags: |
-            type=raw,value=latest
-            type=ref,event=tag
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
@@ -43,3 +41,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
