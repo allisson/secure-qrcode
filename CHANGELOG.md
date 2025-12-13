@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/allisson/secure-qrcode/compare/v2.3.0...v2.4.0) (2025-12-13)
+
+
+### Features
+
+* optimize inefficient code patterns and eliminate redundancies ([#44](https://github.com/allisson/secure-qrcode/issues/44)) ([09ff7e4](https://github.com/allisson/secure-qrcode/commit/09ff7e4c604876a0657c404f8f60df961914d3aa))
+
 ## [2.3.0](https://github.com/allisson/secure-qrcode/compare/v2.2.0...v2.3.0) (2025-10-25)
 
 
