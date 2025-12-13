@@ -1,3 +1,10 @@
+"""Performance tests for secure-qrcode operations.
+
+Note: These tests use hardcoded timeouts optimized for typical hardware.
+If tests fail in CI or slower environments, consider adjusting timeouts
+or setting environment variable SKIP_PERFORMANCE_TESTS=1.
+"""
+
 import time
 
 from secure_qrcode.crypto import decrypt, encrypt
