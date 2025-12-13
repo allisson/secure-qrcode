@@ -40,7 +40,6 @@ def encrypt(plaintext: str, key: str) -> EncryptedData:
 
 def decrypt(encrypted_data: EncryptedData, key: str) -> str:
     salt = b64decode(encrypted_data.salt)
-
     associated_data = b64decode(encrypted_data.associated_data)
     nonce = b64decode(encrypted_data.nonce)
     ciphertext = b64decode(encrypted_data.ciphertext)

@@ -23,6 +23,6 @@ def make(
     qr.make(fit=True)
     img = qr.make_image()
     img_io = BytesIO()
-    img.save(img_io)
+    img.save(img_io, format="PNG")
     img_io.seek(0)
     return img_io

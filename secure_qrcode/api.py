@@ -36,7 +36,7 @@ def decrypt_error_exception_handler(request: Request, exc: DecryptError):
 
 @app.get("/", response_class=HTMLResponse, tags=["home"])
 def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html")
 
 
 @app.post("/v1/encode", status_code=201, tags=["api"])
