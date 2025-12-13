@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/allisson/secure-qrcode/compare/v2.4.0...v2.5.0) (2025-12-13)
+
+
+### Features
+
+* move docker base image to ubuntu 24.04 ([#46](https://github.com/allisson/secure-qrcode/issues/46)) ([9fd2cb9](https://github.com/allisson/secure-qrcode/commit/9fd2cb9ec11b085f46f362e987fb591fcd104955))
+
 ## [2.4.0](https://github.com/allisson/secure-qrcode/compare/v2.3.0...v2.4.0) (2025-12-13)
 
 
