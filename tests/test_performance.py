@@ -1,11 +1,10 @@
 import time
 
 from secure_qrcode.crypto import decrypt, encrypt
-from secure_qrcode.models import EncryptedData
 from secure_qrcode.qrcode import make
 
 
-def test_encrypt_performance(plaintext, key, benchmark=None):
+def test_encrypt_performance(plaintext, key):
     """Test encryption performance - should complete in reasonable time."""
     start = time.perf_counter()
     encrypted_data = encrypt(plaintext, key)
@@ -18,18 +17,10 @@ def test_encrypt_performance(plaintext, key, benchmark=None):
     assert encrypted_data.ciphertext
 
 
-def test_decrypt_performance(key):
+def test_decrypt_performance(key, sample_encrypted_data):
     """Test decryption performance - should complete in reasonable time."""
-    encrypted_data = EncryptedData(
-        salt="KtiCW1E0VLupOXOtpDIlZQ==",
-        iterations=1200000,
-        associated_data="JFPRP6/RMmCIn3DLjA/ceg==",
-        nonce="LbF9P5FwPYyGCTJM",
-        ciphertext="/N8WF0+QnqsDhOQ9iWuhWrXgbrZlG4Hqm9cYt/QO9Msu",
-    )
-
     start = time.perf_counter()
-    decrypted_data = decrypt(encrypted_data, key)
+    decrypted_data = decrypt(sample_encrypted_data, key)
     elapsed = time.perf_counter() - start
 
     # Decryption with PBKDF2 should complete within reasonable time
