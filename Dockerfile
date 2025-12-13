@@ -1,8 +1,9 @@
 ##### Base Stage #####
-FROM python:3.14-slim-trixie AS base
+FROM ubuntu:24.04 AS base
 
 # Set default path
 ENV PATH="/app/.venv/bin:${PATH}"
+ENV UV_PYTHON_INSTALL_DIR="/app/"
 
 ##### Builder Stage #####
 FROM base AS builder
@@ -11,8 +12,7 @@ FROM base AS builder
 WORKDIR /app
 
 # Create virtualenv and install Python packages
-RUN pip install --no-cache-dir pip -U && \
-    pip install --no-cache-dir uv
+COPY --from=docker.io/astral/uv:latest /uv /bin/
 COPY ./uv.lock uv.lock
 COPY ./pyproject.toml pyproject.toml
 RUN uv sync --no-dev --frozen
