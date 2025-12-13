@@ -1,6 +1,6 @@
 from base64 import b64encode
 
-from secure_qrcode.models import DecodeRequest, EncodeRequest, EncryptedData
+from secure_qrcode.models import DecodeRequest, EncodeRequest
 
 
 def test_index(client):
@@ -19,15 +19,8 @@ def test_encode(client, plaintext, key):
     assert response_data["media_type"] == "image/png"
 
 
-def test_decode(client, plaintext, key):
-    encrypted_data = EncryptedData(
-        salt="KtiCW1E0VLupOXOtpDIlZQ==",
-        iterations=1200000,
-        associated_data="JFPRP6/RMmCIn3DLjA/ceg==",
-        nonce="LbF9P5FwPYyGCTJM",
-        ciphertext="/N8WF0+QnqsDhOQ9iWuhWrXgbrZlG4Hqm9cYt/QO9Msu",
-    )
-    request = DecodeRequest(encrypted_data=encrypted_data, key=key)
+def test_decode(client, plaintext, key, sample_encrypted_data):
+    request = DecodeRequest(encrypted_data=sample_encrypted_data, key=key)
     response = client.post("/v1/decode", json=request.model_dump())
 
     assert response.status_code == 201
@@ -35,15 +28,10 @@ def test_decode(client, plaintext, key):
     assert response_data["decrypted_data"] == plaintext
 
 
-def test_decode_error(client, key):
-    encrypted_data = EncryptedData(
-        salt="KtiCW1E0VLupOXOtpDIlZQ==",
-        iterations=1200000,
-        associated_data="JFPRP6/RMmCIn3DLjA/ceg==",
-        nonce="LbF9P5FwPYyGCTJM",
-        ciphertext="/N8WF0+QnqsDhOQ9iWuhWrXgbrZlG4Hqm9cYt/QO9Msu",
+def test_decode_error(client, key, sample_encrypted_data):
+    encrypted_data = sample_encrypted_data.model_copy(
+        update={"associated_data": b64encode(b"invalid-aad").decode()}
     )
-    encrypted_data.associated_data = b64encode(b"invalid-aad").decode("utf-8")
     request = DecodeRequest(encrypted_data=encrypted_data, key=key)
     response = client.post("/v1/decode", json=request.model_dump())
 

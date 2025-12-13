@@ -1,4 +1,3 @@
-import json
 from io import BytesIO
 
 import qrcode
@@ -12,7 +11,7 @@ def make(
     box_size: int = 10,
     border: int = 4,
 ) -> BytesIO:
-    data = json.dumps(encrypted_data.model_dump())
+    data = encrypted_data.model_dump_json()
     qr = qrcode.QRCode(
         version=None,
         error_correction=error_correction.value,
@@ -23,6 +22,6 @@ def make(
     qr.make(fit=True)
     img = qr.make_image()
     img_io = BytesIO()
-    img.save(img_io)
+    img.save(img_io, format="PNG")
     img_io.seek(0)
     return img_io

@@ -36,7 +36,7 @@ def decrypt_error_exception_handler(request: Request, exc: DecryptError):
 
 @app.get("/", response_class=HTMLResponse, tags=["home"])
 def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html")
 
 
 @app.post("/v1/encode", status_code=201, tags=["api"])
@@ -48,7 +48,7 @@ def encode(request: EncodeRequest) -> EncodeResponse:
         box_size=request.box_size,
         border=request.border,
     )
-    return EncodeResponse(content=b64encode(img_io.getvalue()).decode("utf-8"), media_type="image/png")
+    return EncodeResponse(content=b64encode(img_io.getvalue()).decode(), media_type="image/png")
 
 
 @app.post(

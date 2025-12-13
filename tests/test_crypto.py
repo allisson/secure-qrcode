@@ -4,7 +4,6 @@ import pytest
 
 from secure_qrcode.crypto import decrypt, encrypt
 from secure_qrcode.exceptions import DecryptError
-from secure_qrcode.models import EncryptedData
 
 
 def test_encrypt_decrypt(plaintext, key):
@@ -18,15 +17,10 @@ def test_encrypt_decrypt(plaintext, key):
     assert decrypt(encrypted_data, key) == plaintext
 
 
-def test_decrypt_error(key):
-    encrypted_data = EncryptedData(
-        salt="KtiCW1E0VLupOXOtpDIlZQ==",
-        iterations=1200000,
-        associated_data="JFPRP6/RMmCIn3DLjA/ceg==",
-        nonce="LbF9P5FwPYyGCTJM",
-        ciphertext="/N8WF0+QnqsDhOQ9iWuhWrXgbrZlG4Hqm9cYt/QO9Msu",
+def test_decrypt_error(key, sample_encrypted_data):
+    encrypted_data = sample_encrypted_data.model_copy(
+        update={"associated_data": b64encode(b"invalid-aad").decode()}
     )
-    encrypted_data.associated_data = b64encode(b"invalid-aad").decode("utf-8")
 
     with pytest.raises(DecryptError) as excinfo:
         decrypt(encrypted_data, key)
