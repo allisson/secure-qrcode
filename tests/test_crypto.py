@@ -18,8 +18,9 @@ def test_encrypt_decrypt(plaintext, key):
 
 
 def test_decrypt_error(key, sample_encrypted_data):
-    encrypted_data = sample_encrypted_data
-    encrypted_data.associated_data = b64encode(b"invalid-aad").decode()
+    encrypted_data = sample_encrypted_data.model_copy(
+        update={"associated_data": b64encode(b"invalid-aad").decode()}
+    )
 
     with pytest.raises(DecryptError) as excinfo:
         decrypt(encrypted_data, key)

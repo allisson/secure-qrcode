@@ -29,12 +29,10 @@ def test_decrypt_performance(key, sample_encrypted_data):
     assert decrypted_data == "super secret text"
 
 
-def test_qrcode_generation_performance(plaintext, key):
+def test_qrcode_generation_performance(sample_encrypted_data):
     """Test QR code generation performance."""
-    encrypted_data = encrypt(plaintext, key)
-
     start = time.perf_counter()
-    img_io = make(encrypted_data)
+    img_io = make(sample_encrypted_data)
     elapsed = time.perf_counter() - start
 
     # QR code generation should be fast

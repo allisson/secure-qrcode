@@ -29,8 +29,9 @@ def test_decode(client, plaintext, key, sample_encrypted_data):
 
 
 def test_decode_error(client, key, sample_encrypted_data):
-    encrypted_data = sample_encrypted_data
-    encrypted_data.associated_data = b64encode(b"invalid-aad").decode()
+    encrypted_data = sample_encrypted_data.model_copy(
+        update={"associated_data": b64encode(b"invalid-aad").decode()}
+    )
     request = DecodeRequest(encrypted_data=encrypted_data, key=key)
     response = client.post("/v1/decode", json=request.model_dump())
 
