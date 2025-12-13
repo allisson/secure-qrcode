@@ -1,6 +1,7 @@
 import time
 
 from secure_qrcode.crypto import decrypt, encrypt
+from secure_qrcode.models import EncryptedData
 from secure_qrcode.qrcode import make
 
 
@@ -19,8 +20,6 @@ def test_encrypt_performance(plaintext, key, benchmark=None):
 
 def test_decrypt_performance(key):
     """Test decryption performance - should complete in reasonable time."""
-    from secure_qrcode.models import EncryptedData
-
     encrypted_data = EncryptedData(
         salt="KtiCW1E0VLupOXOtpDIlZQ==",
         iterations=1200000,
