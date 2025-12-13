@@ -18,7 +18,7 @@ def derive_key(key: str, salt: bytes, iterations: int) -> bytes:
         salt=salt,
         iterations=iterations,
     )
-    return kdf.derive(key.encode(encoding="utf-8"))
+    return kdf.derive(key.encode())
 
 
 def encrypt(plaintext: str, key: str) -> EncryptedData:
@@ -28,13 +28,13 @@ def encrypt(plaintext: str, key: str) -> EncryptedData:
     nonce = os.urandom(12)
     derived_key = derive_key(key, salt, iterations)
     chacha = ChaCha20Poly1305(derived_key)
-    ciphertext = chacha.encrypt(nonce, plaintext.encode(encoding="utf-8"), associated_data)
+    ciphertext = chacha.encrypt(nonce, plaintext.encode(), associated_data)
     return EncryptedData(
-        salt=b64encode(salt).decode("utf-8"),
+        salt=b64encode(salt).decode(),
         iterations=iterations,
-        associated_data=b64encode(associated_data).decode("utf-8"),
-        nonce=b64encode(nonce).decode("utf-8"),
-        ciphertext=b64encode(ciphertext).decode("utf-8"),
+        associated_data=b64encode(associated_data).decode(),
+        nonce=b64encode(nonce).decode(),
+        ciphertext=b64encode(ciphertext).decode(),
     )
 
 
@@ -45,7 +45,6 @@ def decrypt(encrypted_data: EncryptedData, key: str) -> str:
     ciphertext = b64decode(encrypted_data.ciphertext)
     derived_key = derive_key(key, salt, encrypted_data.iterations)
     chacha = ChaCha20Poly1305(derived_key)
-
     try:
         plaintext = chacha.decrypt(nonce, ciphertext, associated_data)
     except InvalidTag as exc:
@@ -53,4 +52,4 @@ def decrypt(encrypted_data: EncryptedData, key: str) -> str:
     except Exception as exc:
         raise DecryptError(f"Incorrect decryption, exc={exc}") from exc
 
-    return plaintext.decode("utf-8")
+    return plaintext.decode()

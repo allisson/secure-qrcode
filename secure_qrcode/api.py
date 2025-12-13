@@ -48,7 +48,7 @@ def encode(request: EncodeRequest) -> EncodeResponse:
         box_size=request.box_size,
         border=request.border,
     )
-    return EncodeResponse(content=b64encode(img_io.getvalue()).decode("utf-8"), media_type="image/png")
+    return EncodeResponse(content=b64encode(img_io.getvalue()).decode(), media_type="image/png")
 
 
 @app.post(
