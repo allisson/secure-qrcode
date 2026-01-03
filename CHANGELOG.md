@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/allisson/secure-qrcode/compare/v2.5.0...v2.6.0) (2026-01-03)
+
+
+### Features
+
+* add docstrings to models ([#48](https://github.com/allisson/secure-qrcode/issues/48)) ([6ddd8dc](https://github.com/allisson/secure-qrcode/commit/6ddd8dc091d7cd1238fc91773b01134701709534))
+
 ## [2.5.0](https://github.com/allisson/secure-qrcode/compare/v2.4.0...v2.5.0) (2025-12-13)
 
 
