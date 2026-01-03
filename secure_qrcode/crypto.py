@@ -51,8 +51,8 @@ def decrypt(encrypted_data: EncryptedData, key: str) -> str:
     try:
         plaintext = chacha.decrypt(nonce, ciphertext, associated_data)
     except InvalidTag as exc:
-        raise DecryptError("Incorrect decryption, exc=Invalid Tag") from exc
+        raise DecryptError("Incorrect decryption, invalid key or corrupted data") from exc
     except Exception as exc:
-        raise DecryptError(f"Incorrect decryption, exc={exc}") from exc
+        raise DecryptError("Decryption failed due to unexpected error") from exc
 
     return plaintext.decode()

@@ -27,4 +27,4 @@ def test_decrypt_error(key, sample_encrypted_data):
     with pytest.raises(DecryptError) as excinfo:
         decrypt(encrypted_data, key)
 
-    assert str(excinfo.value) == "Incorrect decryption, exc=Invalid Tag"
+    assert str(excinfo.value) == "Incorrect decryption, invalid key or corrupted data"

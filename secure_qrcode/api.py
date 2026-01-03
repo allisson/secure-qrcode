@@ -18,7 +18,7 @@ from secure_qrcode.models import (
 from secure_qrcode.qrcode import make
 
 app = FastAPI(
-    title="Secure QR code",
+    title="Secure QR Code",
     description="Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a secure QR code",
 )
 app.mount("/static", StaticFiles(directory="static"), name="static")
