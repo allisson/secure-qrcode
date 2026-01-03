@@ -53,6 +53,30 @@ open http://localhost:8000
 
 That's it! Your secure QR code generator is now running locally. 🎉
 
+### 💻 Local Development
+
+To set up the project for local development:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/allisson/secure-qrcode.git
+    cd secure-qrcode
+    ```
+
+2.  **Install dependencies and run the API server:**
+    ```bash
+    uv sync
+    uv run uvicorn secure_qrcode.api:app --reload
+    ```
+
+    This will start the API server locally, and it will automatically reload on code changes.
+
+3.  **Access the web interface and API docs:**
+    -   **Web Interface**: [http://localhost:8000](http://localhost:8000)
+    -   **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+    -   **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+
+
 ## 📖 API Documentation
 
 Explore the interactive API docs:
