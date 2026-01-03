@@ -4,12 +4,14 @@ from secure_qrcode.models import DecodeRequest, EncodeRequest
 
 
 def test_index(client):
+    """Test the home page endpoint."""
     response = client.get("/")
 
     assert response.status_code == 200
 
 
 def test_encode(client, plaintext, key):
+    """Test encoding plaintext to QR code."""
     request = EncodeRequest(plaintext=plaintext, key=key)
     response = client.post("/v1/encode", json=request.model_dump())
 
@@ -20,6 +22,7 @@ def test_encode(client, plaintext, key):
 
 
 def test_decode(client, plaintext, key, sample_encrypted_data):
+    """Test decoding QR code to plaintext."""
     request = DecodeRequest(encrypted_data=sample_encrypted_data, key=key)
     response = client.post("/v1/decode", json=request.model_dump())
 
@@ -29,6 +32,7 @@ def test_decode(client, plaintext, key, sample_encrypted_data):
 
 
 def test_decode_error(client, key, sample_encrypted_data):
+    """Test decoding with invalid data returns error."""
     encrypted_data = sample_encrypted_data.model_copy(
         update={"associated_data": b64encode(b"invalid-aad").decode()}
     )
@@ -41,6 +45,7 @@ def test_decode_error(client, key, sample_encrypted_data):
 
 
 def test_healthz(client):
+    """Test the health check endpoint."""
     response = client.get("/healthz")
 
     assert response.status_code == 200

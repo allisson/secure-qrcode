@@ -11,6 +11,7 @@ def make(
     box_size: int = 10,
     border: int = 4,
 ) -> BytesIO:
+    """Generate a QR code image from encrypted data."""
     data = encrypted_data.model_dump_json()
     qr = qrcode.QRCode(
         version=None,

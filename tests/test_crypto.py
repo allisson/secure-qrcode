@@ -7,6 +7,7 @@ from secure_qrcode.exceptions import DecryptError
 
 
 def test_encrypt_decrypt(plaintext, key):
+    """Test that encryption and decryption work correctly."""
     encrypted_data = encrypt(plaintext, key)
 
     assert encrypted_data.salt
@@ -18,6 +19,7 @@ def test_encrypt_decrypt(plaintext, key):
 
 
 def test_decrypt_error(key, sample_encrypted_data):
+    """Test that decryption fails with invalid data."""
     encrypted_data = sample_encrypted_data.model_copy(
         update={"associated_data": b64encode(b"invalid-aad").decode()}
     )
@@ -25,4 +27,4 @@ def test_decrypt_error(key, sample_encrypted_data):
     with pytest.raises(DecryptError) as excinfo:
         decrypt(encrypted_data, key)
 
-    assert str(excinfo.value) == "Incorrect decryption, exc=Invalid Tag"
+    assert str(excinfo.value) == "Incorrect decryption, invalid key or corrupted data"

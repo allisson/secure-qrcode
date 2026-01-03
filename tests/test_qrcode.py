@@ -3,6 +3,7 @@ from secure_qrcode.qrcode import make
 
 
 def test_make():
+    """Test QR code generation from encrypted data."""
     encrypted_data = EncryptedData(
         salt="KtiCW1E0VLupOXOtpDIlZQ==",
         iterations=1200000,

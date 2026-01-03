@@ -7,11 +7,13 @@ from secure_qrcode.models import EncryptedData
 
 @pytest.fixture
 def key():
+    """Fixture providing a test encryption key."""
     return "my super secret key"
 
 
 @pytest.fixture
 def plaintext():
+    """Fixture providing test plaintext data."""
     return "super secret text"
 
 
@@ -29,4 +31,5 @@ def sample_encrypted_data():
 
 @pytest.fixture
 def client():
+    """Fixture providing a FastAPI test client."""
     return TestClient(app)

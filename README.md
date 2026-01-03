@@ -1,44 +1,67 @@
-# secure-qrcode
+# 🔐 Secure QR Code Generator
+
 [![Build Status](https://github.com/allisson/secure-qrcode/actions/workflows/lint-and-tests.yml/badge.svg)](https://github.com/allisson/secure-qrcode/actions)
 [![Docker Image Version](https://img.shields.io/docker/v/allisson/secure-qrcode)](https://hub.docker.com/r/allisson/secure-qrcode)
 
-Encrypt your data using the modern ChaCha20-Poly1305 cipher and export it into a secure QR code.
+> 🚀 **Encrypt your sensitive data using modern cryptography and turn it into secure QR codes!**
 
-## about the versions
+Transform your private information into unreadable encrypted data using the powerful **ChaCha20-Poly1305** cipher, then encode it as a QR code for easy sharing and storage. 🔒📱
 
-The current version "2.x" is incompatible with version "1.x".
+## ✨ Features
 
-To encrypt and decrypt QR codes using version "1.x" use this documentation: https://github.com/allisson/secure-qrcode/tree/v1.6.0
+- 🔐 **Military-grade encryption** with ChaCha20-Poly1305
+- 🏗️ **PBKDF2 key derivation** for enhanced security
+- 📱 **QR code generation** for easy data transfer
+- 🌐 **RESTful API** with interactive documentation
+- 🐳 **Docker support** for easy deployment
+- ⚡ **FastAPI backend** for high performance
 
-## how it works
+## 📋 Version Compatibility
 
-The system receives your key and uses a key derivation function with PBKDF2 to obtain a 32-byte derived key to be applied to the ChaCha20-Poly1305 algorithm.
+⚠️ **Important**: Version "2.x" is **not compatible** with version "1.x".
 
-## access via browser
+For legacy "1.x" QR codes, check the [v1.6.0 documentation](https://github.com/allisson/secure-qrcode/tree/v1.6.0). 📚
 
-Open the url https://secure-qrcode.onrender.com on your browser (This is a free instance type and will stop upon inactivity, so be patient).
+## 🔍 How It Works
 
-If you want to run this on your local machine, see the next section.
+1. 📝 **Input**: Your secret message and encryption key
+2. 🔑 **Derivation**: PBKDF2 transforms your key into a 32-byte cryptographic key
+3. 🔒 **Encryption**: ChaCha20-Poly1305 encrypts your data with authenticated encryption
+4. 📱 **QR Generation**: Encrypted data becomes a scannable QR code
 
-## run the api
-
-The server can be started using a docker image:
-
-```bash
-docker run --rm -p 8000:8000 allisson/secure-qrcode
+```
+Plaintext + Key → PBKDF2 → ChaCha20-Poly1305 → QR Code
 ```
 
-Now the API server will be running on port 8000 and you can open the url http://localhost:8000 on your browser.
+## 🚀 Quick Start
 
-## api documentation
+### 🌐 Try It Online
 
-You can access the API documentation using these two endpoints:
-- http://localhost:8000/docs
-- http://localhost:8000/redoc
+Visit the [live demo](https://secure-qrcode.onrender.com) in your browser! 🌍
 
-## generate a secure QR code
+> 💡 **Note**: This is a free instance that may sleep during inactivity. Please be patient! ⏳
 
-Call the API passing at least the plaintext and key fields:
+### 🐳 Run Locally with Docker
+
+```bash
+# Pull and run the API server
+docker run --rm -p 8000:8000 allisson/secure-qrcode
+
+# Access the web interface
+open http://localhost:8000
+```
+
+That's it! Your secure QR code generator is now running locally. 🎉
+
+## 📖 API Documentation
+
+Explore the interactive API docs:
+- 📋 **Swagger UI**: http://localhost:8000/docs
+- 📄 **ReDoc**: http://localhost:8000/redoc
+
+## 💻 Usage Examples
+
+### 🔐 Generate a Secure QR Code
 
 ```bash
 curl --location 'http://localhost:8000/v1/encode' \
@@ -46,14 +69,14 @@ curl --location 'http://localhost:8000/v1/encode' \
 --data '{
     "plaintext": "my super secret text",
     "key": "my super secret key"
-}' | jq -r '.content' | base64 --decode > qrcode.png
+}' | jq -r '.content' | base64 --decode > secure_qrcode.png
+
+# Your encrypted QR code is saved as secure_qrcode.png! 🖼️
 ```
 
-Now you can open the qrcode.png file and do whatever you want.
+### 🔓 Decrypt a QR Code
 
-## decrypt the QR code
-
-Use any program that read a QR code, the content will be something like this:
+First, scan your QR code to get the encrypted data (it looks like this):
 
 ```json
 {
@@ -65,7 +88,7 @@ Use any program that read a QR code, the content will be something like this:
 }
 ```
 
-Now call the API passing the encrypted_data and the key:
+Then decrypt it:
 
 ```bash
 curl --location 'http://localhost:8000/v1/decode' \
@@ -82,16 +105,36 @@ curl --location 'http://localhost:8000/v1/decode' \
 }' | jq
 ```
 
+**Response:**
 ```json
 {
   "decrypted_data": "my super secret text"
 }
 ```
 
-## change the value of PBKDF2 iterations
+## ⚙️ Configuration
 
-The default value for PBKDF2 iterations is 1200000, you can change this value using the "secure_qrcode_pbkdf2_iterations" environment variable.
+### 🔧 Customize PBKDF2 Iterations
 
+The default PBKDF2 iterations (1,200,000) provide excellent security. For custom security levels:
+
+```bash
+# Run with custom iterations (example: 1,000,000)
+docker run --rm -p 8000:8000 \
+  -e secure_qrcode_pbkdf2_iterations=1000000 \
+  allisson/secure-qrcode
 ```
-docker run --rm -p 8000:8000 -e secure_qrcode_pbkdf2_iterations=1000000 allisson/secure-qrcode
-```
+
+> 💡 **Tip**: Higher iterations = better security but slower performance. Find your balance! ⚖️
+
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to submit issues, feature requests, or pull requests. 🛠️
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 📋
+
+---
+
+**Made with ❤️ for secure data sharing**
