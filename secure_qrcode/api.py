@@ -28,6 +28,7 @@ templates.env.globals["url_for"] = app.url_path_for
 
 @app.exception_handler(DecryptError)
 def decrypt_error_exception_handler(request: Request, exc: DecryptError):
+    """Handle DecryptError exceptions by returning a JSON error response."""
     return JSONResponse(
         status_code=400,
         content={"message": "Incorrect decryption, please check your data"},
@@ -36,11 +37,13 @@ def decrypt_error_exception_handler(request: Request, exc: DecryptError):
 
 @app.get("/", response_class=HTMLResponse, tags=["home"])
 def index(request: Request):
+    """Render the home page template."""
     return templates.TemplateResponse(request, "index.html")
 
 
 @app.post("/v1/encode", status_code=201, tags=["api"])
 def encode(request: EncodeRequest) -> EncodeResponse:
+    """Encrypt plaintext data and generate a QR code image."""
     encrypted_data = encrypt(request.plaintext, request.key)
     img_io = make(
         encrypted_data,
@@ -58,10 +61,12 @@ def encode(request: EncodeRequest) -> EncodeResponse:
     tags=["api"],
 )
 def decode(request: DecodeRequest) -> DecodeResponse:
+    """Decrypt encrypted data from a QR code."""
     decrypted_data = decrypt(request.encrypted_data, request.key)
     return DecodeResponse(decrypted_data=decrypted_data)
 
 
 @app.get("/healthz", tags=["healthcheck"])
 def healthz() -> HealthResponse:
+    """Health check endpoint to verify service availability."""
     return HealthResponse(success=True)

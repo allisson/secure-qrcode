@@ -12,6 +12,7 @@ from secure_qrcode.models import EncryptedData
 
 
 def derive_key(key: str, salt: bytes, iterations: int) -> bytes:
+    """Derive a cryptographic key using PBKDF2."""
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
         length=32,
@@ -22,6 +23,7 @@ def derive_key(key: str, salt: bytes, iterations: int) -> bytes:
 
 
 def encrypt(plaintext: str, key: str) -> EncryptedData:
+    """Encrypt plaintext using ChaCha20-Poly1305 with PBKDF2 key derivation."""
     salt = os.urandom(16)
     iterations = settings.pbkdf2_iterations
     associated_data = os.urandom(16)
@@ -39,6 +41,7 @@ def encrypt(plaintext: str, key: str) -> EncryptedData:
 
 
 def decrypt(encrypted_data: EncryptedData, key: str) -> str:
+    """Decrypt encrypted data using ChaCha20-Poly1305."""
     salt = b64decode(encrypted_data.salt)
     associated_data = b64decode(encrypted_data.associated_data)
     nonce = b64decode(encrypted_data.nonce)
